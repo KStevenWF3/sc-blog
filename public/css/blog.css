@@ -105,3 +105,23 @@ h1, h2, h3, h4, h5, h6 {
 .conteneur-base{
   min-height: 50vh;
 }
+
+.bandeau-header{
+  background: black;
+}
+
+.y-color{
+  color: yellow;
+}
+
+.blue{
+  color: blue;
+}
+
+.white{
+  color: white;
+}
+
+.red{
+  color: red;
+}
