@@ -6,6 +6,43 @@
 
 {% block body %}
 
-    <h1 class="fst-italic text-center my-4">Création d'un article</h1>
+    <h1 class="fst-italic text-center my-4">
+
+    {# Si la condition IF renvoi TRUE, cela veut dire que editMode contient un ID d'un article, alors c'est une modification #}
+    {% if editMode %}
+        Modification article
+    {% else %}
+        {# Sinon editMode ne contient aucun ID d'article, il renvoi FALSE, alors cest une insertin, on entre dans le ELSE #}
+        Création article
+    {% endif %}
+    </h1>
+
+    {#* ouverture de la balise <form> + method="" + action="" #}
+    {{ form_start(formArticle) }}
+
+        {# ! pas besoin de les mettres, c'est pour modif complémentaire #}
+        {#* Fonction wig permettant de faire appel aux différents champ du formulaire #}
+        {# ! exemple de mofig, TWIG aura priorité sur ArticleType.php #}
+        {{ form_row(formArticle.titre, {'label': "Titre de l'article"}) }}
+        {# on peut appeler nos champs un par un #}
+
+        {{ form_row(formArticle.category, {'label': "Catégorie de l'article"}) }}
+
+        {{ form_row(formArticle.contenu) }}
+
+        {{ form_row(formArticle.image) }}
+        {# ! pas besoin de les mettres, c'est pour modif complémentaire #}
+
+        <button type="submit" class="btn btn-dark">
+            {% if editMode %}
+                Enregistrer les modifications
+            {% else %}
+                Enregistrer
+            {% endif %}
+
+        </button>
+
+    {{ form_end(formArticle) }}
+    {#* fermeture de la balise </form> #}
 
 {% endblock %}

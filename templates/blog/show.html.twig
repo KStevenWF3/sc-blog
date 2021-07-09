@@ -9,25 +9,70 @@
 {#  ! ici on le contenu sera dans la section body de base donc dans le body #}
 {% block body %}
 
-  {# {{ dump(articleBDD) }} #}
+    {# {{ dump(articleBDD) }} #}
 
-  {# <h1 class="display-4 fst-italix text-center my-4">Détails de l'article</h1> #}
+    {# <h1 class="display-4 fst-italix text-center my-4">Détails de l'article</h1> #}
 
 
-      <div class="col-md-12">
-          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-              <div class="col-md-7 p-4 d-flex flex-column position-static">
-                  <strong class="d-inline-block mb-2 text-primary">World</strong>
-                  <h3 class="mb-0">{{ articleBDD.titre }}</h3>
-                  <div class="mb-1 text-muted">Posté le {{ articleBDD.date|date('d/m/Y') }} à {{ articleBDD.date|date('H:i:s')}}</div>
-                  <p class="card-text">{{ articleBDD.contenu|raw }}</p>
-                  <a href="{{ path('blog') }}">Retour aux articles</a>
-              </div>
-              <div class="col-md-5 d-none d-lg-block">
-              <img src="{{ articleBDD.image }}" alt="{{ articleBDD.titre }}" class="col-md-12">
-              </div>
-          </div>
-      </div>
+    <div class="col-md-12">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+            <div class="col-md-7 p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">{{ articleBDD.category.titre }}</strong>
+                <h3 class="mb-0">{{ articleBDD.titre }}</h3>
+                <div class="mb-1 text-muted">Posté le {{ articleBDD.date|date('d/m/Y') }} à {{ articleBDD.date|date('H:i:s')}}</div>
+                <p class="card-text">{{ articleBDD.contenu|raw }}</p>
+
+                {#* la fonction path() attend en argument le NOM de la route définit dans le controlleur dans l'annotation @Route("", name="NOM_ROUTE") #}
+                <a href="{{ path('blog') }}">Retour aux articles</a>
+                <a href="{{ path('blog_edit',{'id': articleBDD.id}) }}">Modification</a>
+            </div>
+            <div class="col-md-5 d-none d-lg-block">
+            <img src="{{ articleBDD.image }}" alt="{{ articleBDD.titre }}" class="col-md-12">
+            </div>
+        </div>
+
+        {# AFFICHAGE DU FORMULAIRE D'AJOUT DE COMMENTAIRE #}
+        <h4 class="mt-5 md-2">Donner votre avis...</h4>
+
+        {{ form_start(formComment) }}
+
+            {{ form_row(formComment.auteur) }}
+
+            {{ form_row(formComment.commentaire) }}
+
+            <button type="submit" class="btn btn-dark mt-2">Commenter</button>
+
+        {{ form_end(formComment) }}
+
+        {# AFFICHAGE DES COMMENTAIRES #}
+        <h4 class="mt-5 mb-2">Vos réactions...</h4>
+
+        <div class="row">
+
+            {# articleBDD.comments : objet contenant tout les commentaires liés à l'article #}
+            {# Grace aux relations entre les tables (bi-directionelle), en selectionnant dans la table 'Article', #}
+            {# nous avons accès automatiquement à toutes les correspondances dans les autres tables #}
+            {% for oneComment in articleBDD.comments %}
+
+                {# {{ dump(oneComment) }} #}
+
+                <div class="row shadow rounded">
+                
+                    <div class="col-md-4 py-2">
+                        <strong>{{ oneComment.auteur }}</strong>
+                        <small class="fst-italic">Posté le {{ oneComment.date|date('d/m/Y à H:i:s') }}</small>
+                    </div>
+                    <div class="col-md-8 py-2">
+                        {{ oneComment.commentaire|raw }}
+                    </div>
+                
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
 
 
 {% endblock %}
