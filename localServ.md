@@ -6,10 +6,4 @@ $ git add --all && git commit -m 'relation entité + fixtures + dev templates'
 
 $ git push origin dev_steven_0707
 
-git checkout master
 
-git branch -d dev_steven_0707
-
-git clone <https://github.com/KStevenWF3/sc-blog>
-
-REPLAY MATIN DU 08/07

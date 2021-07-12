@@ -70,7 +70,7 @@ class BlogController extends AbstractController
      */
     public function createOld(Request $request, EntityManagerInterface $manager): Response
     {
-        dump($request);
+        // dump($request);
 
         //* la prorpiété "$request->request" permet de stocker et d'accéder aux données saisie dans le formulaire,
         //* c'est à dire aux données de la surperloable $_POST
@@ -146,7 +146,7 @@ class BlogController extends AbstractController
         //  $article->setTitre("Titre bidon")
         //          ->setContenu("Contenu bidon");
 
-        dump($request); //! ajouté avec (Request $request) après fonctionnement valable, ça récupère les données saisies du form
+        // dump($request); //! ajouté avec (Request $request) après fonctionnement valable, ça récupère les données saisies du form
         //! permet donc de réintroduire les données dans le form
 
         //* createForm() permet ici de créer un formulaire d'ajout d'article en fonction de la classe ArticleType
@@ -201,7 +201,7 @@ class BlogController extends AbstractController
      * @Route("/blog/{id}", name="blog_show")
      */
     // public function show(ArticleRepository $reportArticle, $id): Response
-    public function show(Article $article, Request $request): Response
+    public function show(Article $article, Request $request, EntityManagerInterface $manager): Response
     {
         //* L'id transmit dans l'URL est envoyé directement en argument de la fonction show(),
         //* ce qui nous permet d'avoir accès à l'id de l'article à selectionner en BDD au sein de la méthode show()
@@ -228,6 +228,44 @@ class BlogController extends AbstractController
         $formComment->handleRequest($request);
 
         // dump($request);
+
+        if($formComment->isSubmitted() && $formComment->isValid())
+        {
+            $comment->setDate(new \DateTime());
+
+            //* On établit la relation entre le commentaire et l'article (clé étrangère)
+            //* setArticle() : méthode issue de l'entité Comment qui permet de renseigner l'article associé au commentaire
+            //* Cette méthode attends en argument l'objet entité Article de la BDD et non la clé étrangère elle même
+            $comment->setArticle($article);
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            //? addFlash() : méthode permettant de déclarer un message de validation stocké en session
+            // arguments :
+            // 1. Identifiant du message (sucess / danger)
+            // 2. Le message utilisateur
+            $this->addFlash(
+                'success',
+                'Votre commentaire a bien été posté !'
+            );
+
+            /*
+                session
+                array(
+                    success => [
+                        0 => "Le commentaire a été posté avec succès !"
+                    ]
+                )
+            */
+
+            // dump($comment);
+
+            //* Après l'insertion, on redirige l'internaute vers l'affichage de l'article afin de rebooter le formulaire
+            return $this->redirectToRoute('blog_show', [
+                'id' => $article->getId()
+            ]);
+        }
 
 
         return $this->render('blog/show.html.twig', [
