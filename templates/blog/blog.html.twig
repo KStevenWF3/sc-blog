@@ -46,6 +46,7 @@
             {#? C'est une route paramétrée qui attend un ID d'un article dans l'URL #}
             {#? en 2eme argument de la fonction path(), nous fournissons l'id de l'article à transmettre dans l'URL ({'id': oneArticle.id}) #}
             <a href="{{ path('blog_show', {'id': oneArticle.id}) }}" class="stretched-link">Lire la suite</a>
+            {# !"stretched-link" permet de rendre la carte entierement cliquable #}
           </div>
           <div class="col-md-5 d-none d-lg-block">
             <img src="{{ oneArticle.image }}" alt="{{ oneArticle.titre }}" class="col-md-12">
