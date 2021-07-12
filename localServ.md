@@ -7,5 +7,3 @@ $ git add --all && git commit -m 'relation entité + fixtures + dev templates'
 $ git push origin dev_steven_0707
 
 
-
-REPLAY MATIN DU 08/07
