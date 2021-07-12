@@ -31,6 +31,19 @@
             </div>
         </div>
 
+        {# AFFICHAGE MESSAGE VALIDATION UTILISATEUR #}
+        {#* app : objet Twig qui contient toute les données de la session en cours, du fichier de session #}
+        {# Flases() ; méthode permettant d'accéder en session au message flash utilisateur déclaré dans le controlleur, #}
+        {# il faut lui fournir en argument l'identifiant (success) #}
+        {# message : variable de reception que nous définissons, qui receptionne un msg utilisateur par tour de boucle #}
+        {% for message in app.flashes('success') %}
+
+            <div class="col-md-4 mx-auto alert alert-success text-center p-2">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
         {# AFFICHAGE DU FORMULAIRE D'AJOUT DE COMMENTAIRE #}
         <h4 class="mt-5 md-2">Donner votre avis...</h4>
 
@@ -49,28 +62,38 @@
 
         <div class="row">
 
-            {# articleBDD.comments : objet contenant tout les commentaires liés à l'article #}
-            {# Grace aux relations entre les tables (bi-directionelle), en selectionnant dans la table 'Article', #}
-            {# nous avons accès automatiquement à toutes les correspondances dans les autres tables #}
-            {% for oneComment in articleBDD.comments %}
+            {# Si l'article possède bien des commentaire, si l'objet articleBDD.comments n'est pas vide, alors on entre dans le condition IF et onaffiche les commentaires #}
+            {% if articleBDD.comments is not empty %}
 
-                {# {{ dump(oneComment) }} #}
+                {# articleBDD.comments : objet contenant tout les commentaires liés à l'article #}
+                {# Grace aux relations entre les tables (bi-directionelle), en selectionnant dans la table 'Article', #}
+                {# nous avons accès automatiquement à toutes les correspondances dans les autres tables #}
+                {% for oneComment in articleBDD.comments %}
 
-                <div class="row shadow rounded">
-                
-                    <div class="col-md-4 py-2">
-                        <strong>{{ oneComment.auteur }}</strong>
-                        <small class="fst-italic">Posté le {{ oneComment.date|date('d/m/Y à H:i:s') }}</small>
+                    {# {{ dump(oneComment) }} #}
+
+                    <div class="row shadow rounded">
+                    
+                        <div class="col-md-4 py-2">
+                            <strong>{{ oneComment.auteur }}</strong>
+                            <small class="fst-italic">Posté le {{ oneComment.date|date('d/m/Y à H:i:s') }}</small>
+                        </div>
+                        <div class="col-md-8 py-2">
+                            {{ oneComment.commentaire|raw }}
+                        </div>
+                    
                     </div>
-                    <div class="col-md-8 py-2">
-                        {{ oneComment.commentaire|raw }}
-                    </div>
-                
-                </div>
 
-            {% endfor %}
+                {% endfor %}
 
         </div>
+
+            {# Sinon l'article n'est associé à aucun commentaire, on entre dans le ELSE et onaffiche un message à l'utilisateur #}
+            {% else %}
+
+                <p class="fst-italic text-center">Soyez le premier à donner votre avis.</p>
+
+            {% endif %}
 
     </div>
 
