@@ -116,7 +116,8 @@ class BlogController extends AbstractController
         //* La classe Request permet de stocker et d'avoir accès aux données véhiculées par les superglobales
         //? ($_POST, $_GET, $_COOKIE, $_FILES, ect...)
 
-        return $this->render('blog/create_old.html.twig');
+        // return $this->render('blog/create_old.html.twig');
+        return $this->render('blog/create.html.twig');
     }
 
 
