@@ -19,7 +19,6 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-<<<<<<< HEAD
             # On indique à symfony la classe permettant de s'authentifié (LoginFormAuthenticator),
             # symfony va faire tout le travail pour nous et va contrôler au moment de la connexion,
             # l'email et le mot de passe
@@ -29,13 +28,6 @@ security:
                 path: app_logout
                 # On définit la route de destination une fois déconnecté
                 target: blog
-=======
-            custom_authenticator: App\Security\LoginFormAuthenticator
-            logout:
-                path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
->>>>>>> b7bc17a805a798ffc8fb029da70d6770608437b4
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

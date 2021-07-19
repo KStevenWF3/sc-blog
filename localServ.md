@@ -1,5 +1,7 @@
 # HELP
 
+composer install
+
 php -S 127.0.0.1:8000 -t public
 
 cd sc-blog
@@ -12,16 +14,12 @@ git checkout master
 
 git branch -d dev_steven_0707
 
-<<<<<<< HEAD
-=======
 <!-- pour forcer le delete -->
->>>>>>> b7bc17a805a798ffc8fb029da70d6770608437b4
 git branch -D dev_steven_0707
 
 git pull origin master
 
-<<<<<<< HEAD
-git clone https://github.com/KStevenWF3/sc-blog
+<!-- git clone https://github.com/KStevenWF3/sc-blog -->
 
 REPLAY MATIN DU 08/07
 
@@ -38,29 +36,3 @@ php bin/console d:s:u -f
 php bin/console d:f:l -q ajouter les fixture
 
 SELECT2 (liste déroulante avec barre de recherche selection)
-=======
-git clone <https://github.com/KStevenWF3/sc-blog>
-
-REPLAY MATIN DU 08/07
-
-php bin/console doctrine:schema:validate
-php bin/console d:s:v
-
-php bin/console make:entity
-pbc make:entity Tag (avec dmmder edition de fichier à la racine du site)
-
-php bin/console doctrine:schema:update --force
-<!-- => comaprer toute les modif faite dans les entité avec les dernier changement de la BDD, générer le code SQL necessaire, l'executer et donner une confirmatiion. -->
-!! SYSTEMATIQUE QUAND ON RECUPERE LE PROJET DE QUELQU'UN (pour la strucute de la BDD)
-
-php bin/console d:s:u -f
-
-php bin/console d:f:l -q
-ajouter les fixture
-
-SELECT2 (liste déroulante avec barre de recherche selection)
-
-<!-- php bin/console doctrine:schema:update  -->
-
-<!-- Doctrine ORM O R Manager -->
->>>>>>> b7bc17a805a798ffc8fb029da70d6770608437b4

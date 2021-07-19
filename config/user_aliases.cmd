@@ -13,3 +13,4 @@ unalias=alias /d $1
 vi=vim $*
 cmderr=cd /d "%CMDER_ROOT%"
 pbc=php bin/console
+gac=git add --all && git commit -m
