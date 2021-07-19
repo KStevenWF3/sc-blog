@@ -1,3 +1,5 @@
+# HELP
+
 php -S 127.0.0.1:8000 -t public
 
 cd sc-blog
@@ -10,8 +12,10 @@ git checkout master
 
 git branch -d dev_steven_0707
 
-git pull origin master
+<!-- pour forcer le delete -->
+git branch -D dev_steven_0707
 
+git pull origin master
 
 git clone <https://github.com/KStevenWF3/sc-blog>
 
@@ -34,6 +38,6 @@ ajouter les fixture
 
 SELECT2 (liste déroulante avec barre de recherche selection)
 
-php bin/console doctrine:schema:update 
+<!-- php bin/console doctrine:schema:update  -->
 
-Doctrine ORM O R Manager
+<!-- Doctrine ORM O R Manager -->
