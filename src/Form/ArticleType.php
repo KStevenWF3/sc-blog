@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Tag;
 use App\Entity\Article;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\Category;
 
 class ArticleType extends AbstractType
 {
@@ -36,6 +37,11 @@ class ArticleType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class, //? on précise de quelle entité provient ce champ
                 'choice_label' => 'titre' //? le contenu de la liste déroulante sera le titre des catégories
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class, //? on précise de quelle entité provient ce champ
+                'choice_label' => 'title', //? liste toutes les données de l'entité
+                'multiple' => true //? manytomany plsuieurs choix possible
             ])
             ->add('contenu', TextareaType::class, [
                 'required' => false,
