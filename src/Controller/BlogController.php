@@ -162,6 +162,7 @@ class BlogController extends AbstractController
         //! non possible dans la version create_old
 
         // dump($article);
+        // dd($formArticle); //? permet de voir le contenu du formulaire pris en compte, commenter pour poster
 
         //* Si le formulaire a bien été validé && que toute les données saisie sont bien transmise à la bonne entité,
         //* alors on entre dans la condition IF
@@ -173,6 +174,12 @@ class BlogController extends AbstractController
             {
                 $article->setDate(new \DateTime());
             }
+
+            $tags = $formArticle->get('tags')->getData();
+
+            // dd($tags); // on va voir les tags posté sur une page special
+            // dd($tags[0]);
+            // dd($article);
 
             $manager->persist($article);
 
