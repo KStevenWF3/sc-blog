@@ -30,8 +30,9 @@ class Tag
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="tags")
      */
+    //inversedBy="tags")
     private $articles;
 
     public function __construct()

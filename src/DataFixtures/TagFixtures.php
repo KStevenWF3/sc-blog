@@ -18,8 +18,8 @@ class TagFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         # Création de notre instance de Faker
-        // $faker = \Faker\Factory::create('fr_FR');
-        $faker = FACTORY::create('fr_FR');
+        $faker = \Faker\Factory::create('fr_FR');
+        // $faker = FACTORY::create('fr_FR');
 
         # Génération de 10 tags aléatoire
         for($i = 1; $i <= 10 ; $i++)

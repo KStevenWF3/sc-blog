@@ -21,6 +21,7 @@ php bin/console doctrine:schema:validate
 php bin/console d:s:v
 
 php bin/console make:entity
+pbc make:entity Tag (avec dmmder edition de fichier à la racine du site)
 
 php bin/console doctrine:schema:update --force
 <!-- => comaprer toute les modif faite dans les entité avec les dernier changement de la BDD, générer le code SQL necessaire, l'executer et donner une confirmatiion. -->
@@ -33,3 +34,6 @@ ajouter les fixture
 
 SELECT2 (liste déroulante avec barre de recherche selection)
 
+php bin/console doctrine:schema:update 
+
+Doctrine ORM O R Manager

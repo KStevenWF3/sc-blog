@@ -70,8 +70,9 @@ class Article
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="articles")
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="articles")
      */
+    //mappedBy="articles")
     private $tags;
 
 
