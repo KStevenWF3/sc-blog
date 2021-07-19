@@ -1,3 +1,5 @@
+# HELP
+
 php -S 127.0.0.1:8000 -t public
 
 cd sc-blog
@@ -11,7 +13,6 @@ git checkout master
 git branch -d dev_steven_0707
 
 git pull origin master
-
 
 git clone <https://github.com/KStevenWF3/sc-blog>
 
