@@ -19,6 +19,7 @@
             <div class="col-md-7 p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary">{{ articleBDD.category.titre }}</strong>
                 <h3 class="mb-0">{{ articleBDD.titre }}</h3>
+                <h6>{{ articleBDD.tags.first.title }}</h6>
                 <div class="mb-1 text-muted">Posté le {{ articleBDD.date|date('d/m/Y') }} à {{ articleBDD.date|date('H:i:s')}}</div>
                 <p class="card-text">{{ articleBDD.contenu|raw }}</p>
 

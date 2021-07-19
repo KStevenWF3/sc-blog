@@ -17,6 +17,7 @@ class ArticlesFixtures extends Fixture
         //* On importe la librairie Faker pour les fixtures, cela nous permet de crée des fausses articles,
         //* catégories, commentaires plus évolués avec par exemple des faux noms, faux prénoms, date aléatoires ect...
         $faker = \Faker\Factory::create('fr_FR');
+        // $faker = FACTORY::create('fr_FR');
 
         //* Création de 3 catégories
         for($cat = 1; $cat <= 3; $cat++)
